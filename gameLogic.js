@@ -1,5 +1,6 @@
 // Define common variables
-let canvas, context, box, snake, direction, food, gameInterval;
+let canvas, context, box, snake, direction, food, gameInterval, wall;
+
 //background of board
 function drawBG() {
     context.fillStyle = "lightgreen";
@@ -21,6 +22,24 @@ function drawSnake() {
 function drawFood() {
     context.fillStyle = "red";
     context.fillRect(food.x, food.y, box, box);
+}
+//wall
+function drawWall() {
+    context.fillStyle = "gray";
+    wall.forEach(wallBlock => {
+        context.fillRect(wallBlock.x, wallBlock.y, box, box);
+    });
+}
+function generateFood() {
+    for (let i = 0; i < wall.length; i++) {
+        if ((wall[i].x != food.x) || (wall[i].y != food.y)) {
+            drawWall();
+            drawFood();
+            break;
+        }
+
+    }
+
 }
 function update(event) {
     if (event.keyCode == 37 && direction != 'right') direction = 'left';
@@ -48,7 +67,7 @@ function mainLevelOne() {
             break;
         }
     }
-    
+
     if (gameOver) {
         clearInterval(gameInterval); // Stop the game loop
         alert('Game Over :(');
@@ -128,6 +147,132 @@ function mainLevelTwo() {
     drawSnake();
     drawFood();
 }
+
+// Function for level three game logic
+function mainLevelThree() {
+    let gameOver = false; // Flag to track game over condition
+
+    // Updates the snake's position based on direction.
+    if (snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
+    if (snake[0].x < 0 && direction == 'left') snake[0].x = 16 * box;
+    if (snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
+    if (snake[0].y < 0 && direction == 'up') snake[0].y = 16 * box;
+
+
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if (direction == "right") snakeX += box;
+    if (direction == "left") snakeX -= box;
+    if (direction == "up") snakeY -= box;
+    if (direction == "down") snakeY += box;
+    // Check if the snake hits the boundaries
+    if (snakeX >= 16 * box || snakeX < 0 || snakeY >= 16 * box || snakeY < 0) {
+        gameOver = true;
+    }
+    // Check if the snake collides with the wall
+    for (let i = 0; i < wall.length; i++) {
+        if (snakeX === wall[i].x && snakeY === wall[i].y) {
+            gameOver = true;
+            break;
+        }
+    }
+    // Check if the snake collides with itself
+    for (let i = 1; i < snake.length; i++) {
+        if (snakeX === snake[i].x && snakeY === snake[i].y) {
+            gameOver = true;
+            break;
+        }
+    }
+    if (snakeX != food.x || snakeY != food.y) {
+        snake.pop(); //pop tira o último elemento da lista
+    } else {
+        food.x = Math.floor(Math.random() * 15 + 1) * box;
+        food.y = Math.floor(Math.random() * 15 + 1) * box;
+    }
+    if (gameOver) {
+        clearInterval(gameInterval); // Stop the game loop
+        alert('Game Over :(');
+        return; // Exit the function to prevent further execution
+    }
+
+
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead);
+
+    drawBG();
+    drawSnake();
+    generateFood();
+}
+// Function for level four game logic
+function mainLevelFour() {
+    let gameOver = false; // Flag to track game over condition
+
+    // Updates the snake's position based on direction.
+    if (snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
+    if (snake[0].x < 0 && direction == 'left') snake[0].x = 16 * box;
+    if (snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
+    if (snake[0].y < 0 && direction == 'up') snake[0].y = 16 * box;
+
+
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if (direction == "right") snakeX += box;
+    if (direction == "left") snakeX -= box;
+    if (direction == "up") snakeY -= box;
+    if (direction == "down") snakeY += box;
+    // Check if the snake hits the boundaries
+    if (snakeX >= 16 * box || snakeX < 0 || snakeY >= 16 * box || snakeY < 0) {
+        gameOver = true;
+    }
+    // Check if the snake collides with the wall
+    for (let i = 0; i < wall.length; i++) {
+        if (snakeX === wall[i].x && snakeY === wall[i].y) {
+            gameOver = true;
+            break;
+        }
+    }
+    // Check if the snake collides with itself
+    for (let i = 1; i < snake.length; i++) {
+        if (snakeX === snake[i].x && snakeY === snake[i].y) {
+            gameOver = true;
+            break;
+        }
+    }
+    if (snakeX != food.x || snakeY != food.y) {
+        snake.pop();
+    } else {
+        food.x = Math.floor(Math.random() * 15 + 1) * box;
+        food.y = Math.floor(Math.random() * 15 + 1) * box;
+        for (let i = 0; i < wall.length; i++) {
+            wall[i].x = Math.floor(Math.random() * 15 + i) * box;
+            wall[i].y = Math.floor(Math.random() * 15 + i) * box;
+
+        }
+    }
+    if (gameOver) {
+        clearInterval(gameInterval); // Stop the game loop
+        alert('Game Over :(');
+        return; // Exit the function to prevent further execution
+    }
+
+
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead);
+
+    drawBG();
+    drawSnake();
+    generateFood();
+}
 // Function to initialize level one
 function initLevelOne() {
     canvas = document.getElementById("snake_1");
@@ -165,7 +310,82 @@ function initLevelTwo() {
     // Event listener for reset button
     document.getElementById("resetButton_2").addEventListener("click", resetLevelTwo);
 }
+function initLevelThree() {
 
+    canvas = document.getElementById("snake_3");
+    context = canvas.getContext("2d");
+    box = 32;
+    snake = [{ x: 8 * box, y: 8 * box }, { x: 7 * box, y: 7 * box }, { x: 6 * box, y: 6 * box }];
+    direction = "right";
+    food = { x: Math.floor(Math.random() * 15 + 1) * box, y: Math.floor(Math.random() * 15 + 1) * box };
+    wall = [{
+        x: 3 * box,
+        y: 5 * box
+    },
+    {
+        x: 3 * box,
+        y: 6 * box
+    },
+    {
+        x: 4 * box,
+        y: 6 * box
+    },
+    {
+        x: 9 * box,
+        y: 6 * box
+    },
+    {
+        x: 9 * box,
+        y: 7 * box
+    }
+    ];
+    // Event listener for key controls
+    document.addEventListener('keydown', update);
+
+    // Start the game loop
+    gameInterval = setInterval(mainLevelThree, 100);
+
+    // Event listener for reset button
+    document.getElementById("resetButton_3").addEventListener("click", resetLevelThree);
+}
+function initLevelFour() {
+
+    canvas = document.getElementById("snake_4");
+    context = canvas.getContext("2d");
+    box = 32;
+    snake = [{ x: 8 * box, y: 8 * box }, { x: 7 * box, y: 7 * box }, { x: 6 * box, y: 6 * box }];
+    direction = "right";
+    food = { x: Math.floor(Math.random() * 15 + 1) * box, y: Math.floor(Math.random() * 15 + 1) * box };
+    wall = [{
+        x: 3 * box,
+        y: 5 * box
+    },
+    {
+        x: 3 * box,
+        y: 6 * box
+    },
+    {
+        x: 4 * box,
+        y: 6 * box
+    },
+    {
+        x: 9 * box,
+        y: 6 * box
+    },
+    {
+        x: 9 * box,
+        y: 7 * box
+    }
+    ];
+    // Event listener for key controls
+    document.addEventListener('keydown', update);
+
+    // Start the game loop
+    gameInterval = setInterval(mainLevelFour, 100);
+
+    // Event listener for reset button
+    document.getElementById("resetButton_4").addEventListener("click", resetLevelFour);
+}
 // Function to reset level one
 function resetLevelOne() {
     // Level one specific game reset logic
@@ -179,11 +399,18 @@ function resetLevelTwo() {
     clearInterval(gameInterval);
     initLevelTwo();
 }
-
-// Initialize the game based on the title of the HTML document
-// Check the document title
-console.log(document.title);
-
+// Function to reset level three
+function resetLevelThree() {
+    // Level two specific game reset logic
+    clearInterval(gameInterval);
+    initLevelThree();
+}
+// Function to reset level four
+function resetLevelFour() {
+    // Level two specific game reset logic
+    clearInterval(gameInterval);
+    initLevelFour();
+}
 // Initialize the game based on the title of the HTML document
 if (document.title === "Level 1") {
     console.log(document.getElementById("snake_1"));
@@ -191,6 +418,12 @@ if (document.title === "Level 1") {
 } else if (document.title === "Level 2") {
     console.log(document.getElementById("snake_2"));
     initLevelTwo();
+} else if (document.title === "Level 3") {
+    console.log(document.getElementById("snake_3"));
+    initLevelThree();
+} else if (document.title === "Level 4") {
+    console.log(document.getElementById("snake_4"));
+    initLevelFour();
 }
 
-console.log('success');
+// console.log('success');

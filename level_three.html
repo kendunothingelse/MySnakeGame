@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Snake Game</title>
+    <title>Level 3</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <script defer src="script.js"></script> -->
 </head>
 
 <body>
-    <h1>LEVEL 3</h1>
-    <canvas id="snake" width="512" height="512"></canvas>
-    <button id="resetButton">Reset game</button>
-    <a id="backTomain_3" href="levelChoosing.html">Back to main_3</a>
-    <script>
-        let canvas = document.getElementById("snake");
+    <h1>LEVEL 3: WALL</h1>
+    <canvas id="snake_3" width="512" height="512"></canvas>
+    <button id="resetButton_3">Reset game</button>
+    <a href="levelChoosing.html">Back to main</a>
+    <script src="gameLogic.js"></script>
+    <!-- <script>
+        let canvas = document.getElementById("snake_3");
         let context = canvas.getContext("2d"); //....
         let box = 32;
         //snake size and position
@@ -177,7 +177,7 @@
 
         let game = setInterval(main, 100);
         //Reset button event
-        document.getElementById("resetButton").addEventListener("click", function () {
+        document.getElementById("resetButton_3").addEventListener("click", function () {
             // Clear the canvas
             context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -205,7 +205,7 @@
             clearInterval(game);
             game = setInterval(main, 100);
         });
-    </script>
+    </script> -->
 </body>
 
 </html>
