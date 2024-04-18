@@ -1,10 +1,12 @@
 // Define common variables
 let canvas, context, box, snake, direction, food, gameInterval, wall;
-
+// Define variables for score and scoreboard element
+let score = 0;
+const scoreDisplay = document.getElementById('score');
 //background of board
 function drawBG() {
     context.fillStyle = "lightgreen";
-    context.fillRect(0, 0, 16 * box, 16 * box); //desenha o retângulo usando x e y e a largura e altura setadas
+    context.fillRect(0, 0, 16 * box, 16 * box);
 }
 //snake
 function drawSnake() {
@@ -30,6 +32,10 @@ function drawWall() {
         context.fillRect(wallBlock.x, wallBlock.y, box, box);
     });
 }
+// Function to update the score on the scoreboard
+function updateScore() {
+    scoreDisplay.textContent = score;
+}
 function generateFood() {
     for (let i = 0; i < wall.length; i++) {
         if ((wall[i].x != food.x) || (wall[i].y != food.y)) {
@@ -41,6 +47,7 @@ function generateFood() {
     }
 
 }
+
 function update(event) {
     if (event.keyCode == 37 && direction != 'right') direction = 'left';
     if (event.keyCode == 38 && direction != 'down') direction = 'up';
@@ -68,18 +75,14 @@ function mainLevelOne() {
         }
     }
 
-    if (gameOver) {
-        clearInterval(gameInterval); // Stop the game loop
-        alert('Game Over :(');
-        return; // Exit the function to prevent further execution
-    }
-
     // Check if the snake collides with the food
     if (snakeX != food.x || snakeY != food.y) {
-        snake.pop(); //pop tira o último elemento da lista
+        snake.pop();
     } else {
         food.x = Math.floor(Math.random() * 15 + 1) * box;
         food.y = Math.floor(Math.random() * 15 + 1) * box;
+        score += 10;
+        updateScore();
     }
 
 
@@ -89,6 +92,12 @@ function mainLevelOne() {
 
     // Update the direction of the snake
     snake.unshift(newHead);
+
+    if (gameOver) {
+        clearInterval(gameInterval); // Stop the game loop
+        alert('Game Over :(');
+        return; // Exit the function to prevent further execution
+    }
 
     // Redraw the game
     drawBG();
@@ -118,19 +127,15 @@ function mainLevelTwo() {
         }
     }
 
-    if (gameOver) {
-        clearInterval(gameInterval); // Stop the game loop
-        alert('Game Over :(');
-        return; // Exit the function to prevent further execution
-    }
 
-    // Remove the tail if the snake doesn't eat food
-    if (snakeX !== food.x || snakeY !== food.y) {
+    // Check if the snake collides with the food
+    if (snakeX != food.x || snakeY != food.y) {
         snake.pop();
     } else {
-        // Generate new food at a random position
         food.x = Math.floor(Math.random() * 15 + 1) * box;
         food.y = Math.floor(Math.random() * 15 + 1) * box;
+        score += 10;
+        updateScore();
     }
 
     // Create a new head for the snake
@@ -141,6 +146,12 @@ function mainLevelTwo() {
 
     // Add the new head to the beginning of the snake array
     snake.unshift(newHead);
+
+    if (gameOver) {
+        clearInterval(gameInterval); // Stop the game loop
+        alert('Game Over :(');
+        return; // Exit the function to prevent further execution
+    }
 
     // Redraw the game
     drawBG();
@@ -184,16 +195,14 @@ function mainLevelThree() {
             break;
         }
     }
+    // Check if the snake collides with the food
     if (snakeX != food.x || snakeY != food.y) {
-        snake.pop(); //pop tira o último elemento da lista
+        snake.pop();
     } else {
         food.x = Math.floor(Math.random() * 15 + 1) * box;
         food.y = Math.floor(Math.random() * 15 + 1) * box;
-    }
-    if (gameOver) {
-        clearInterval(gameInterval); // Stop the game loop
-        alert('Game Over :(');
-        return; // Exit the function to prevent further execution
+        score += 10;
+        updateScore();
     }
 
 
@@ -204,10 +213,17 @@ function mainLevelThree() {
 
     snake.unshift(newHead);
 
+    if (gameOver) {
+        clearInterval(gameInterval); // Stop the game loop
+        alert('Game Over :(');
+        return; // Exit the function to prevent further execution
+    }
+
     drawBG();
     drawSnake();
     generateFood();
 }
+
 // Function for level four game logic
 function mainLevelFour() {
     let gameOver = false; // Flag to track game over condition
@@ -244,6 +260,7 @@ function mainLevelFour() {
             break;
         }
     }
+    // Check if the snake collides with the food
     if (snakeX != food.x || snakeY != food.y) {
         snake.pop();
     } else {
@@ -254,12 +271,10 @@ function mainLevelFour() {
             wall[i].y = Math.floor(Math.random() * 15 + i) * box;
 
         }
+        score += 10;
+        updateScore();
     }
-    if (gameOver) {
-        clearInterval(gameInterval); // Stop the game loop
-        alert('Game Over :(');
-        return; // Exit the function to prevent further execution
-    }
+
 
 
     let newHead = {
@@ -269,6 +284,11 @@ function mainLevelFour() {
 
     snake.unshift(newHead);
 
+    if (gameOver) {
+        clearInterval(gameInterval); // Stop the game loop
+        alert('Game Over :(');
+        return; // Exit the function to prevent further execution
+    }
     drawBG();
     drawSnake();
     generateFood();

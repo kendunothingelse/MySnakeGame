@@ -6,124 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Level 2</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/MySnakeGame/style/style.css">
 </head>
 
 <body>
     <h1>LEVEL 2: ADDING BOUNDARIES</h1>
+    <div id="scoreboard">
+        Score: <span id="score">0</span>
+    </div>
     <canvas id="snake_2" width="512" height="512"></canvas>
     <button id="resetButton_2">Reset game</button>
     <a href="levelChoosing.html">Back to main</a>
     <script src="gameLogic.js"></script>
-    <!-- <script>
-        let canvas = document.getElementById("snake"); //criar elemento que irá rodar o jogo
-        let context = canvas.getContext("2d"); //....
-        let box = 32;
-        let snake = []; //criar cobrinha como lista, já que ela vai ser uma série de coordenadas, que quando pintadas, criam os quadradinhos
-        snake[0] = {
-            x: 8 * box,
-            y: 8 * box
-        }
-        let direction = "right";
-        let food = {
-            x: Math.floor(Math.random() * 15 + 1) * box,
-            y: Math.floor(Math.random() * 15 + 1) * box
-        }
-
-        function drawBG() {
-            context.fillStyle = "lightgreen";
-            context.fillRect(0, 0, 16 * box, 16 * box); //desenha o retângulo usando x e y e a largura e altura setadas
-        }
-
-        function drawSnake() {
-            for (i = 0; i < snake.length; i++) {
-                context.fillStyle = "green";
-                context.fillRect(snake[i].x, snake[i].y, box, box);
-            }
-        }
-
-        function drawFood() {
-            context.fillStyle = "red";
-            context.fillRect(food.x, food.y, box, box);
-        }
-
-        //quando um evento acontece, detecta e chama uma função
-        document.addEventListener('keydown', update);
-
-        function update(event) {
-            if (event.keyCode == 37 && direction != 'right') direction = 'left';
-            if (event.keyCode == 38 && direction != 'down') direction = 'up';
-            if (event.keyCode == 39 && direction != 'left') direction = 'right';
-            if (event.keyCode == 40 && direction != 'up') direction = 'down';
-        }
-        function main_2() {
-            let gameOver = false; // Flag to track game over condition
-
-            // Update the snake's position based on direction
-            let snakeX = snake[0].x + (direction === "right" ? box : direction === "left" ? -box : 0);
-            let snakeY = snake[0].y + (direction === "down" ? box : direction === "up" ? -box : 0);
-
-            // Check if the snake hits the boundaries
-            if (snakeX >= 16 * box || snakeX < 0 || snakeY >= 16 * box || snakeY < 0) {
-                gameOver = true;
-            }
-
-            // Check if the snake collides with itself
-            for (let i = 1; i < snake.length; i++) {
-                if (snakeX === snake[i].x && snakeY === snake[i].y) {
-                    gameOver = true;
-                    break;
-                }
-            }
-
-            if (gameOver) {
-                clearInterval(jogo); // Stop the game loop
-                alert('Game Over :(');
-                return; // Exit the function to prevent further execution
-            }
-
-            // Remove the tail if the snake doesn't eat food
-            if (snakeX !== food.x || snakeY !== food.y) {
-                snake.pop();
-            } else {
-                // Generate new food at a random position
-                food.x = Math.floor(Math.random() * 15 + 1) * box;
-                food.y = Math.floor(Math.random() * 15 + 1) * box;
-            }
-
-            // Create a new head for the snake
-            let newHead = {
-                x: snakeX,
-                y: snakeY
-            };
-
-            // Add the new head to the beginning of the snake array
-            snake.unshift(newHead);
-
-            // Redraw the game
-            drawBG();
-            drawSnake();
-            drawFood();
-        }
-
-        let jogo = setInterval(main_2, 100);
-        document.getElementById("resetButton").addEventListener("click", function () {
-            // Clear the canvas
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Reset snake position and direction
-            snake = [{ x: 8 * box, y: 8 * box }];
-            direction = "right";
-
-            // Reset food position
-            food.x = Math.floor(Math.random() * 15 + 1) * box;
-            food.y = Math.floor(Math.random() * 15 + 1) * box;
-
-            // Restart the game loop
-            clearInterval(jogo);
-            jogo = setInterval(main_2, 100);
-        });
-    </script> -->
 </body>
 
 </html>
