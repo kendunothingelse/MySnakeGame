@@ -1,10 +1,17 @@
-body{
+body {
     height: 95vh;
     width: 95vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color:white;
+    background-color: white;
     color: rgb(52, 165, 52);
+}
+
+.container {
+    #info-popup {
+        display: none;
+        border: 1px solid black;
+    }
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Level Choosing</title>
-    <link rel="stylesheet" href="/MySnakeGame/style/style.css">
+    <link rel="stylesheet" href="./style/style.css">
 </head>
 
 <body>
@@ -15,7 +15,18 @@
     <a href="level_two.html">LEVEL 2</a>
     <a href="level_three.html">LEVEL 3</a>
     <a href="level_four.html">LEVEL 4</a>
-    
+    <div class="container">
+        <button class="openButton" onclick="openPopup()" >Information</button>
+        <div id="info-popup">
+            <h1>Đỗ Nhật Khoa</h1>
+            <p>DH21DTB</p>
+            <p>21130399</p>
+            <p>26/08/2003</p>
+            <button class="closeButton" onclick="closePopup()">Close</button>
+
+        </div>
+    </div>
+    <script src="gameLogic.js"></script>
 </body>
 
 </html>

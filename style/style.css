@@ -7,4 +7,9 @@ body {
   align-items: center;
   background-color: white;
   color: rgb(52, 165, 52);
+}
+
+.container #info-popup {
+  display: none;
+  border: 1px solid black;
 }/*# sourceMappingURL=style.css.map */

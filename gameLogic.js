@@ -446,4 +446,12 @@ if (document.title === "Level 1") {
     initLevelFour();
 }
 
-// console.log('success');
+//popup information
+function openPopup() {
+    if (document.getElementById("info-popup").style.display == "block") {
+        document.getElementById("info-popup").style.display = "none";
+    } else {
+        document.getElementById("info-popup").style.display = "block"
+    }
+    
+}
