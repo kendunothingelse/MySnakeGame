@@ -5,29 +5,29 @@ let score = 0;
 const scoreDisplay = document.getElementById('score');
 //background of board
 function drawBG() {
-    context.fillStyle = "lightgreen";
+    context.fillStyle = "#8B956D";
     context.fillRect(0, 0, 16 * box, 16 * box);
 }
 //snake
 function drawSnake() {
     for (i = 0; i < snake.length; i++) {
         if (i === 0) {
-            context.fillStyle = "blue";
-
+            context.fillStyle = "#6286D9";
         } else {
-            context.fillStyle = "green";
+            context.fillStyle = "#ADD962";
         }
         context.fillRect(snake[i].x, snake[i].y, box, box);
     }
+
 }
 //food
 function drawFood() {
-    context.fillStyle = "red";
+    context.fillStyle = "#FF9F91";
     context.fillRect(food.x, food.y, box, box);
 }
 //wall
 function drawWall() {
-    context.fillStyle = "gray";
+    context.fillStyle = "#2E331D";
     wall.forEach(wallBlock => {
         context.fillRect(wallBlock.x, wallBlock.y, box, box);
     });
@@ -309,7 +309,7 @@ function initLevelOne() {
     gameInterval = setInterval(mainLevelOne, 100);
 
     // Event listener for reset button
-    document.getElementById("resetButton_1").addEventListener("click", resetLevelOne);
+    document.getElementById("resetButton").addEventListener("click", resetLevelOne);
 }
 
 // Function to initialize level two
@@ -328,7 +328,7 @@ function initLevelTwo() {
     gameInterval = setInterval(mainLevelTwo, 100);
 
     // Event listener for reset button
-    document.getElementById("resetButton_2").addEventListener("click", resetLevelTwo);
+    document.getElementById("resetButton").addEventListener("click", resetLevelTwo);
 }
 function initLevelThree() {
 
@@ -357,6 +357,19 @@ function initLevelThree() {
     {
         x: 9 * box,
         y: 7 * box
+    },
+
+    {
+        x: 9 * box,
+        y: 13 * box
+    },
+    {
+        x: 9 * box,
+        y: 14 * box
+    }, 
+    {
+        x: 10 * box,
+        y: 13 * box
     }
     ];
     // Event listener for key controls
@@ -366,7 +379,7 @@ function initLevelThree() {
     gameInterval = setInterval(mainLevelThree, 100);
 
     // Event listener for reset button
-    document.getElementById("resetButton_3").addEventListener("click", resetLevelThree);
+    document.getElementById("resetButton").addEventListener("click", resetLevelThree);
 }
 function initLevelFour() {
 
@@ -404,7 +417,7 @@ function initLevelFour() {
     gameInterval = setInterval(mainLevelFour, 100);
 
     // Event listener for reset button
-    document.getElementById("resetButton_4").addEventListener("click", resetLevelFour);
+    document.getElementById("resetButton").addEventListener("click", resetLevelFour);
 }
 // Function to reset level one
 function resetLevelOne() {
@@ -447,11 +460,16 @@ if (document.title === "Level 1") {
 }
 
 //popup information
+
 function openPopup() {
     if (document.getElementById("info-popup").style.display == "block") {
         document.getElementById("info-popup").style.display = "none";
+        document.getElementById("openButton").innerHTML = "Information";
+
     } else {
-        document.getElementById("info-popup").style.display = "block"
+        document.getElementById("info-popup").style.display = "block";
+        document.getElementById("openButton").innerHTML = "Close";
+
     }
-    
+
 }

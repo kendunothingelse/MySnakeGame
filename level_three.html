@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Level 3</title>
     <link rel="stylesheet" href="./style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -15,8 +19,10 @@
         Score: <span id="score">0</span>
     </div>
     <canvas id="snake_3" width="512" height="512"></canvas>
-    <button id="resetButton_3">Reset game</button>
-    <a href="levelChoosing.html">Back to main</a>
+    <div id="optionButton">
+        <button id="resetButton">Reset game</button>
+        <a href="levelChoosing.html">Back to main <i class="bi bi-arrow-return-left"></i></a>
+    </div>
     <script src="gameLogic.js"></script>
 
 </body>
